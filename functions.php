@@ -60,7 +60,7 @@ function finance_theme_setup() {
 
     // Add support for editor styles
     add_theme_support('editor-styles');
-    add_editor_style('editor-style.css');
+    add_editor_style('dist/css/main.css');
 
     // Add support for responsive embedded content
     add_theme_support('responsive-embeds');
@@ -122,7 +122,7 @@ function finance_theme_setup() {
     ));
 
     // Enqueue editor styles
-    add_editor_style('editor-style.css');
+    add_editor_style('dist/css/main.css');
 }
 add_action('after_setup_theme', 'finance_theme_setup');
 
@@ -167,26 +167,42 @@ function finance_theme_scripts() {
     // Enqueue main stylesheet
     wp_enqueue_style('finance-theme-style', get_stylesheet_uri(), array(), FINANCE_THEME_VERSION);
 
-    // Enqueue TailwindCSS (built file)
-    wp_enqueue_style('finance-theme-tailwind', get_template_directory_uri() . '/dist/main.css', array(), FINANCE_THEME_VERSION);
+    // Check if built CSS file exists, otherwise use fallback
+    $built_css = get_template_directory() . '/dist/main.css';
+    $fallback_css = get_template_directory() . '/assets/fallback.css';
 
-    // Enqueue main JavaScript file
-    wp_enqueue_script('finance-theme-script', get_template_directory_uri() . '/dist/main.js', array('jquery'), FINANCE_THEME_VERSION, true);
+    if (file_exists($built_css)) {
+        wp_enqueue_style('finance-theme-tailwind', get_template_directory_uri() . '/dist/main.css', array('finance-theme-style'), FINANCE_THEME_VERSION);
+    } elseif (file_exists($fallback_css)) {
+        wp_enqueue_style('finance-theme-fallback', get_template_directory_uri() . '/assets/fallback.css', array('finance-theme-style'), FINANCE_THEME_VERSION);
+    }
+
+    // Check if built JS file exists, otherwise use fallback
+    $built_js = get_template_directory() . '/dist/main.js';
+    $fallback_js = get_template_directory() . '/assets/fallback.js';
+
+    if (file_exists($built_js)) {
+        wp_enqueue_script('finance-theme-script', get_template_directory_uri() . '/dist/main.js', array('jquery'), FINANCE_THEME_VERSION, true);
+    } elseif (file_exists($fallback_js)) {
+        wp_enqueue_script('finance-theme-fallback', get_template_directory_uri() . '/assets/fallback.js', array(), FINANCE_THEME_VERSION, true);
+    }
 
     // Enqueue comment reply script on single posts/pages with comments open
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }
 
-    // Localize script for AJAX and theme variables
-    wp_localize_script('finance-theme-script', 'financeTheme', array(
-        'ajaxUrl' => admin_url('admin-ajax.php'),
-        'nonce' => wp_create_nonce('finance_theme_nonce'),
-        'strings' => array(
-            'menuToggle' => esc_html__('Toggle menu', 'finance-theme'),
-            'menuClose' => esc_html__('Close menu', 'finance-theme'),
-        ),
-    ));
+    // Localize script for AJAX and theme variables (only if main script exists)
+    if (file_exists($built_js)) {
+        wp_localize_script('finance-theme-script', 'financeTheme', array(
+            'ajaxUrl' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('finance_theme_nonce'),
+            'strings' => array(
+                'menuToggle' => esc_html__('Toggle menu', 'finance-theme'),
+                'menuClose' => esc_html__('Close menu', 'finance-theme'),
+            ),
+        ));
+    }
 }
 add_action('wp_enqueue_scripts', 'finance_theme_scripts');
 
@@ -194,7 +210,15 @@ add_action('wp_enqueue_scripts', 'finance_theme_scripts');
  * Enqueue block editor styles
  */
 function finance_theme_block_editor_styles() {
-    wp_enqueue_style('finance-theme-block-editor-styles', get_template_directory_uri() . '/editor-style.css', array(), FINANCE_THEME_VERSION);
+    // Check if built CSS file exists, otherwise use fallback
+    $built_css = get_template_directory() . '/dist/css/main.css';
+    $fallback_css = get_template_directory() . '/assets/fallback.css';
+
+    if (file_exists($built_css)) {
+        wp_enqueue_style('finance-theme-block-editor-styles', get_template_directory_uri() . '/dist/css/main.css', array(), FINANCE_THEME_VERSION);
+    } elseif (file_exists($fallback_css)) {
+        wp_enqueue_style('finance-theme-block-editor-fallback', get_template_directory_uri() . '/assets/fallback.css', array(), FINANCE_THEME_VERSION);
+    }
 }
 add_action('enqueue_block_editor_assets', 'finance_theme_block_editor_styles');
 
@@ -438,8 +462,12 @@ add_action('init', 'finance_theme_register_patterns');
 function finance_theme_check_build_files() {
     $css_file = get_template_directory() . '/dist/main.css';
     $js_file = get_template_directory() . '/dist/main.js';
+    $fallback_css = get_template_directory() . '/assets/fallback.css';
+    $fallback_js = get_template_directory() . '/assets/fallback.js';
 
-    if (!file_exists($css_file) || !file_exists($js_file)) {
+    // Only show notice if neither built files nor fallbacks exist
+    if ((!file_exists($css_file) && !file_exists($fallback_css)) ||
+        (!file_exists($js_file) && !file_exists($fallback_js))) {
         add_action('admin_notices', 'finance_theme_build_notice');
     }
 }
@@ -448,11 +476,31 @@ function finance_theme_check_build_files() {
  * Admin notice for missing build files
  */
 function finance_theme_build_notice() {
-    ?>
-    <div class="notice notice-warning is-dismissible">
-        <p><?php esc_html_e('Finance Theme: TailwindCSS build files not found. Please run "npm run build" to generate the required CSS and JS files.', 'finance-theme'); ?></p>
-    </div>
-    <?php
+    $css_file = get_template_directory() . '/dist/main.css';
+    $js_file = get_template_directory() . '/dist/main.js';
+    $fallback_css = get_template_directory() . '/assets/fallback.css';
+    $fallback_js = get_template_directory() . '/assets/fallback.js';
+
+    $missing_css = !file_exists($css_file) && !file_exists($fallback_css);
+    $missing_js = !file_exists($js_file) && !file_exists($fallback_js);
+
+    if ($missing_css || $missing_js) {
+        $message = esc_html__('Finance Theme: Some assets are missing. ', 'finance-theme');
+
+        if ($missing_css && $missing_js) {
+            $message .= esc_html__('Please run "npm run build" to generate optimized CSS and JS files, or ensure fallback files exist in assets/ directory.', 'finance-theme');
+        } elseif ($missing_css) {
+            $message .= esc_html__('Please run "npm run build" to generate optimized CSS, or ensure fallback.css exists in assets/ directory.', 'finance-theme');
+        } elseif ($missing_js) {
+            $message .= esc_html__('Please run "npm run build" to generate optimized JavaScript, or ensure fallback.js exists in assets/ directory.', 'finance-theme');
+        }
+
+        ?>
+        <div class="notice notice-info is-dismissible">
+            <p><?php echo $message; ?></p>
+        </div>
+        <?php
+    }
 }
 
 // Check build files on admin init

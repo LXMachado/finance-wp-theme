@@ -1,0 +1,437 @@
+/* ==========================================================================
+   Finance Theme - Block Editor Styles
+   ========================================================================== */
+
+/* TailwindCSS Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Editor-Specific Base Styles
+   ========================================================================== */
+
+/* Root Variables for Editor Context */
+:root {
+  /* Theme Colors from theme.json */
+  --wp--preset--color--primary-blue: #1e40af;
+  --wp--preset--color--secondary-teal: #0d9488;
+  --wp--preset--color--accent-green: #16a34a;
+  --wp--preset--color--dark-slate: #1e293b;
+  --wp--preset--color--light-gray: #f8fafc;
+  --wp--preset--color--white: #ffffff;
+
+  /* Font Sizes from theme.json */
+  --wp--preset--font-size--small: 0.875rem;
+  --wp--preset--font-size--medium: 1rem;
+  --wp--preset--font-size--large: 1.125rem;
+  --wp--preset--font-size--x-large: 1.25rem;
+
+  /* Spacing from theme.json */
+  --wp--preset--spacing--small: 0.5rem;
+  --wp--preset--spacing--medium: 1rem;
+  --wp--preset--spacing--large: 2rem;
+}
+
+/* Editor Body Styles */
+.editor-styles-wrapper {
+  font-family: var(--wp--preset--font-family--system-font-stack, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif);
+  font-size: var(--wp--preset--font-size--medium);
+  line-height: 1.6;
+  color: var(--wp--preset--color--dark-slate);
+}
+
+/* ==========================================================================
+   Block-Specific Editor Styles
+   ========================================================================== */
+
+/* Paragraph Block */
+.editor-styles-wrapper p {
+  margin-bottom: var(--wp--preset--spacing--medium);
+  line-height: 1.6;
+}
+
+/* Heading Blocks */
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6 {
+  font-family: var(--wp--preset--font-family--inter, 'Inter', sans-serif);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: var(--wp--preset--spacing--medium);
+  color: var(--wp--preset--color--dark-slate);
+}
+
+.editor-styles-wrapper h1 {
+  font-size: var(--wp--preset--font-size--x-large);
+}
+
+.editor-styles-wrapper h2 {
+  font-size: var(--wp--preset--font-size--large);
+}
+
+.editor-styles-wrapper h3 {
+  font-size: var(--wp--preset--font-size--medium);
+}
+
+/* List Blocks */
+.editor-styles-wrapper ul,
+.editor-styles-wrapper ol {
+  margin-bottom: var(--wp--preset--spacing--medium);
+  padding-left: var(--wp--preset--spacing--large);
+}
+
+.editor-styles-wrapper li {
+  margin-bottom: var(--wp--preset--spacing--small);
+}
+
+/* Quote Block */
+.editor-styles-wrapper .wp-block-quote {
+  border-left: 4px solid var(--wp--preset--color--primary-blue);
+  padding-left: var(--wp--preset--spacing--medium);
+  margin: var(--wp--preset--spacing--large) 0;
+  font-style: italic;
+}
+
+.editor-styles-wrapper .wp-block-quote cite {
+  font-style: normal;
+  color: #64748b;
+  font-size: var(--wp--preset--font-size--small);
+}
+
+/* Pullquote Block */
+.editor-styles-wrapper .wp-block-pullquote {
+  border-top: 4px solid var(--wp--preset--color--primary-blue);
+  border-bottom: 4px solid var(--wp--preset--color--primary-blue);
+  padding: var(--wp--preset--spacing--medium) 0;
+  text-align: center;
+  font-size: var(--wp--preset--font-size--large);
+  font-style: italic;
+}
+
+/* Button Block */
+.editor-styles-wrapper .wp-block-button .wp-block-button__link {
+  background-color: var(--wp--preset--color--primary-blue);
+  color: var(--wp--preset--color--white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: var(--wp--preset--font-size--medium);
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.editor-styles-wrapper .wp-block-button .wp-block-button__link:hover {
+  background-color: var(--wp--preset--color--dark-slate);
+  color: var(--wp--preset--color--white);
+}
+
+/* Group Block */
+.editor-styles-wrapper .wp-block-group {
+  margin-bottom: var(--wp--preset--spacing--large);
+}
+
+/* Columns Block */
+.editor-styles-wrapper .wp-block-columns {
+  margin-bottom: var(--wp--preset--spacing--large);
+}
+
+.editor-styles-wrapper .wp-block-column {
+  margin-bottom: var(--wp--preset--spacing--medium);
+}
+
+/* Cover Block */
+.editor-styles-wrapper .wp-block-cover {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: var(--wp--preset--spacing--large);
+}
+
+/* Gallery Block */
+.editor-styles-wrapper .wp-block-gallery {
+  margin-bottom: var(--wp--preset--spacing--large);
+}
+
+.editor-styles-wrapper .wp-block-gallery .blocks-gallery-item {
+  margin: 0;
+}
+
+/* Embed Blocks */
+.editor-styles-wrapper .wp-block-embed {
+  margin-bottom: var(--wp--preset--spacing--large);
+}
+
+.editor-styles-wrapper .wp-block-embed figcaption {
+  margin-top: var(--wp--preset--spacing--small);
+  font-size: var(--wp--preset--font-size--small);
+  color: #64748b;
+  text-align: center;
+  italic: true;
+}
+
+/* ==========================================================================
+   Editor Alignment Classes
+   ========================================================================== */
+
+.editor-styles-wrapper .alignwide {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  max-width: 100vw;
+  width: auto;
+}
+
+.editor-styles-wrapper .alignfull {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  max-width: 100vw;
+  width: auto;
+}
+
+.editor-styles-wrapper .aligncenter {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.editor-styles-wrapper .alignleft {
+  float: left;
+  margin-right: var(--wp--preset--spacing--medium);
+  margin-bottom: var(--wp--preset--spacing--medium);
+}
+
+.editor-styles-wrapper .alignright {
+  float: right;
+  margin-left: var(--wp--preset--spacing--medium);
+  margin-bottom: var(--wp--preset--spacing--medium);
+}
+
+/* ==========================================================================
+   Color Palette Integration
+   ========================================================================== */
+
+/* Primary Blue */
+.editor-styles-wrapper .has-primary-blue-color {
+  color: var(--wp--preset--color--primary-blue) !important;
+}
+
+.editor-styles-wrapper .has-primary-blue-background-color {
+  background-color: var(--wp--preset--color--primary-blue) !important;
+}
+
+/* Secondary Teal */
+.editor-styles-wrapper .has-secondary-teal-color {
+  color: var(--wp--preset--color--secondary-teal) !important;
+}
+
+.editor-styles-wrapper .has-secondary-teal-background-color {
+  background-color: var(--wp--preset--color--secondary-teal) !important;
+}
+
+/* Accent Green */
+.editor-styles-wrapper .has-accent-green-color {
+  color: var(--wp--preset--color--accent-green) !important;
+}
+
+.editor-styles-wrapper .has-accent-green-background-color {
+  background-color: var(--wp--preset--color--accent-green) !important;
+}
+
+/* Dark Slate */
+.editor-styles-wrapper .has-dark-slate-color {
+  color: var(--wp--preset--color--dark-slate) !important;
+}
+
+.editor-styles-wrapper .has-dark-slate-background-color {
+  background-color: var(--wp--preset--color--dark-slate) !important;
+}
+
+/* Light Gray */
+.editor-styles-wrapper .has-light-gray-color {
+  color: var(--wp--preset--color--light-gray) !important;
+}
+
+.editor-styles-wrapper .has-light-gray-background-color {
+  background-color: var(--wp--preset--color--light-gray) !important;
+}
+
+/* White */
+.editor-styles-wrapper .has-white-color {
+  color: var(--wp--preset--color--white) !important;
+}
+
+.editor-styles-wrapper .has-white-background-color {
+  background-color: var(--wp--preset--color--white) !important;
+}
+
+/* ==========================================================================
+   Font Size Integration
+   ========================================================================== */
+
+.editor-styles-wrapper .has-small-font-size {
+  font-size: var(--wp--preset--font-size--small) !important;
+}
+
+.editor-styles-wrapper .has-medium-font-size {
+  font-size: var(--wp--preset--font-size--medium) !important;
+}
+
+.editor-styles-wrapper .has-large-font-size {
+  font-size: var(--wp--preset--font-size--large) !important;
+}
+
+.editor-styles-wrapper .has-x-large-font-size {
+  font-size: var(--wp--preset--font-size--x-large) !important;
+}
+
+/* ==========================================================================
+   Editor UI Enhancements
+   ========================================================================== */
+
+/* Improve block selection visibility */
+.editor-styles-wrapper .wp-block.is-selected {
+  outline: 2px solid var(--wp--preset--color--primary-blue);
+  outline-offset: 2px;
+}
+
+/* Better focus styles for accessibility */
+.editor-styles-wrapper .wp-block.is-selected:focus {
+  outline: 2px solid var(--wp--preset--color--primary-blue);
+  outline-offset: 2px;
+}
+
+/* Ensure images are responsive in editor */
+.editor-styles-wrapper img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Table block styling */
+.editor-styles-wrapper .wp-block-table {
+  margin-bottom: var(--wp--preset--spacing--large);
+}
+
+.editor-styles-wrapper .wp-block-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.editor-styles-wrapper .wp-block-table th,
+.editor-styles-wrapper .wp-block-table td {
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.editor-styles-wrapper .wp-block-table th {
+  background-color: var(--wp--preset--color--light-gray);
+  font-weight: 600;
+  color: var(--wp--preset--color--dark-slate);
+}
+
+/* Code block styling */
+.editor-styles-wrapper .wp-block-code {
+  background-color: var(--wp--preset--color--light-gray);
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  padding: var(--wp--preset--spacing--medium);
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: var(--wp--preset--font-size--small);
+  margin-bottom: var(--wp--preset--spacing--large);
+}
+
+.editor-styles-wrapper code {
+  background-color: var(--wp--preset--color--light-gray);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+/* Preformatted block styling */
+.editor-styles-wrapper .wp-block-preformatted {
+  background-color: var(--wp--preset--color--light-gray);
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  padding: var(--wp--preset--spacing--medium);
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  white-space: pre-wrap;
+  margin-bottom: var(--wp--preset--spacing--large);
+}
+
+/* Separator block styling */
+.editor-styles-wrapper .wp-block-separator {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: var(--wp--preset--spacing--large) 0;
+}
+
+.editor-styles-wrapper .wp-block-separator.is-style-wide {
+  border-top-width: 2px;
+}
+
+.editor-styles-wrapper .wp-block-separator.is-style-dots {
+  border: none;
+  text-align: center;
+  max-width: none;
+  line-height: 1;
+  height: auto;
+}
+
+.editor-styles-wrapper .wp-block-separator.is-style-dots::before {
+  content: '···';
+  color: #64748b;
+  font-size: var(--wp--preset--font-size--large);
+  letter-spacing: 2em;
+  padding-left: 2em;
+}
+
+/* ==========================================================================
+   Responsive Design for Editor
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  .editor-styles-wrapper h1 {
+    font-size: calc(var(--wp--preset--font-size--x-large) * 1.2);
+  }
+
+  .editor-styles-wrapper h2 {
+    font-size: calc(var(--wp--preset--font-size--large) * 1.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  .editor-styles-wrapper h1 {
+    font-size: calc(var(--wp--preset--font-size--x-large) * 1.5);
+  }
+
+  .editor-styles-wrapper h2 {
+    font-size: calc(var(--wp--preset--font-size--large) * 1.4);
+  }
+}
+
+/* ==========================================================================
+   Print Styles for Editor
+   ========================================================================== */
+
+@media print {
+  .editor-styles-wrapper * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .editor-styles-wrapper a,
+  .editor-styles-wrapper a:visited {
+    text-decoration: underline;
+  }
+
+  .editor-styles-wrapper a[href]:after {
+    content: " (" attr(href) ")";
+  }
+}

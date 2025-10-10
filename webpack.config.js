@@ -27,6 +27,7 @@ module.exports = {
   // Entry points
   entry: {
     main: path.join(srcDir, 'main.css'),
+    'editor-style': path.join(srcDir, 'editor-style.css'),
     script: path.join(srcDir, 'script.js'),
   },
 
