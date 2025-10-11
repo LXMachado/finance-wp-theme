@@ -102,22 +102,7 @@
 			"customFontSize": true,
 			"dropCap": true,
 			"fontFamilies": [
-				{
-					"name": "Inter",
-					"slug": "inter",
-					"fontFamily": "Inter, sans-serif",
-					"fontFace": [
-						{
-							"fontDisplay": "swap",
-							"fontFamily": "Inter",
-							"fontStyle": "normal",
-							"fontWeight": "400",
-							"src": [
-								"file:./assets/fonts/inter-normal-400.woff2"
-							]
-						}
-					]
-				},
+				
 				{
 					"name": "System Font Stack",
 					"slug": "system-font-stack",
