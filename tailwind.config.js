@@ -8,10 +8,14 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
   content: [
     './*.php',
-    './**/*.php',
-    './src/**/*.{js,jsx,css}',
+    './src/**/*.{js,jsx,ts,tsx,css}',
     './templates/**/*.php',
     './includes/**/*.php',
+    './patterns/**/*.php',
+    './blocks/**/*.php',
+    './parts/**/*.php',
+    '!./dist/**/*',
+    '!./node_modules/**/*',
   ],
 
   // Enable dark mode

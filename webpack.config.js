@@ -90,9 +90,11 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sourceMap: !isProduction,
+              api: 'modern',
+              implementation: require('sass'),
               sassOptions: {
-                outputStyle: isProduction ? 'compressed' : 'expanded',
-                includePaths: [srcDir],
+                style: isProduction ? 'compressed' : 'expanded',
+                loadPaths: [srcDir],
               },
             },
           },
