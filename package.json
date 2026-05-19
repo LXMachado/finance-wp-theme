@@ -151,5 +151,8 @@
     "*.json",
     "README.md"
   ],
-  "main": "dist/main.js"
+  "main": "dist/main.js",
+  "overrides": {
+    "picomatch": "^2.3.2"
+  }
 }
