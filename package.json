@@ -153,6 +153,14 @@
   ],
   "main": "dist/main.js",
   "overrides": {
-    "picomatch": "4.0.3"
+    "@babel/plugin-transform-modules-systemjs": "^7.28.0",
+    "brace-expansion": "^1.1.13",
+    "fast-uri": "^3.1.1",
+    "flatted": "^3.3.3",
+    "immutable": "^5.1.4",
+    "minimatch": "^3.1.3",
+    "picomatch": "^4.0.4",
+    "serialize-javascript": "^6.0.3",
+    "svgo": "^3.3.3"
   }
 }
