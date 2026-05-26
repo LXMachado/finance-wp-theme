@@ -153,6 +153,6 @@
   ],
   "main": "dist/main.js",
   "overrides": {
-    "picomatch": "latest"
+    "picomatch": "4.0.3"
   }
 }
