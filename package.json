@@ -45,7 +45,7 @@
     "@wordpress/browserslist-config": "latest",
     "autoprefixer": "latest",
     "babel-loader": "latest",
-    "browserslist": "latest",
+    "browserslist": "^4.29.1",
     "css-loader": "latest",
     "css-minimizer-webpack-plugin": "latest",
     "eslint": "latest",
